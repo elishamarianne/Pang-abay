@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mga Aralin - Pang-abay | Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2b2477;
+    --pink: #f0509a;
+    --pink-soft: #ffd3e4;
+    --blue: #3f6fd1;
+    --blue-soft: #cfe5fb;
+    --yellow: #f5b727;
+    --yellow-soft: #fff0b0;
+    --purple: #7b4bc4;
+    --purple-soft: #d9cbf5;
+    --green: #3a9a47;
+    --green-soft: #cdeeb8;
+    --ink: #2a2350;
+    --bg: #fff7fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Fredoka", "Trebuchet MS", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(ellipse at 0% 0%, #ffd9ec 0, transparent 40%),
+      radial-gradient(ellipse at 100% 0%, #e6dcff 0, transparent 40%),
+      radial-gradient(ellipse at 50% 100%, #dff0ff 0, transparent 45%),
+      var(--bg);
+    min-height: 100vh;
+  }
+  img { max-width: 100%; display: block; }
+  .page { position: relative; max-width: 1100px; margin: 0 auto; padding: 28px 20px 0; overflow: hidden; }
+
+  .deco { position: absolute; pointer-events: none; z-index: 0; }
+  .deco svg { width: 100%; height: 100%; display: block; }
+  .d-star-1 { width: 38px; top: 20px; left: 21%; }
+  .d-star-2 { width: 34px; top: 60px; right: 24%; }
+  .d-star-3 { width: 26px; top: 270px; left: 14%; }
+  .d-star-4 { width: 30px; top: 650px; right: 6%; }
+  .d-heart-1 { width: 24px; top: 30px; right: 8%; }
+  .d-heart-2 { width: 20px; top: 380px; left: 20%; }
+  .d-heart-3 { width: 20px; top: 420px; right: 18%; }
+  .balloon { position: absolute; z-index: 0; pointer-events: none; width: 46px; height: 58px; border-radius: 50% 50% 48% 48%; }
+  .balloon::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 46px; background: #c9b8d9; transform: translateX(-50%); }
+  .b-pink { background: #ffb3cf; top: 560px; left: -8px; }
+  .b-purple { background: #b79be6; top: 700px; right: 28px; }
+  .b-blue { background: #9cc7f2; top: 650px; right: 80px; width: 38px; height: 48px; }
+  .b-green { background: #a6e28f; top: 720px; right: -4px; width: 36px; height: 46px; }
+  .rainbow { position: absolute; z-index: 0; pointer-events: none; width: 150px; height: 75px; border-radius: 150px 150px 0 0; border: 10px solid #ff8fb5; border-bottom: none; box-shadow: inset 0 0 0 10px #ffd27a, inset 0 0 0 20px #9fe0a5, inset 0 0 0 30px #9fcdf7; }
+  .rb-1 { top: 735px; left: -30px; }
+
+  .hero { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr minmax(0, 520px) 1fr; align-items: start; gap: 8px; text-align: center; }
+  .hero-side { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .hero-side .mascot-big { width: 170px; height: 190px; }
+  .hero-side .mascot-small { width: 120px; height: 130px; }
+  .hero-left { margin-top: 4px; }
+  .hero-right { margin-top: 4px; }
+  .title { line-height: 0.95; padding-top: 6px; }
+  .title .t1 { display: block; font-weight: 700; font-size: clamp(2.2rem, 6.2vw, 4.2rem); color: var(--navy); -webkit-text-stroke: 7px #fff; paint-order: stroke fill; text-shadow: 0 4px 0 rgba(43, 36, 119, 0.15); letter-spacing: 1px; }
+  .title .t2 { display: block; font-weight: 700; font-size: clamp(2.8rem, 8.8vw, 6rem); color: var(--pink); -webkit-text-stroke: 8px #fff; paint-order: stroke fill; text-shadow: 0 5px 0 rgba(240, 80, 154, 0.25); letter-spacing: 2px; }
+  .tagline { display: inline-block; margin-top: 14px; padding: 8px 26px; background: var(--yellow-soft); border: 3px solid #fff; border-radius: 14px; box-shadow: 0 4px 0 #f1d36b, 0 8px 16px rgba(245, 183, 39, 0.25); font-family: "Patrick Hand", "Fredoka", cursive; font-size: clamp(1rem, 2.4vw, 1.4rem); color: #3a2f6b; }
+
+  .pill { display: inline-block; font-weight: 600; padding: 8px 34px; border-radius: 16px; border: 3px solid #fff; text-align: center; }
+  .pill-purple { background: var(--purple); color: #fff; font-size: clamp(1.4rem, 3.6vw, 2.2rem); box-shadow: 0 5px 0 #5a33a0; }
+  .pill-green { background: var(--green-soft); color: #1d4f2a; font-size: clamp(1.6rem, 4vw, 2.6rem); padding: 10px 46px; border-radius: 22px; box-shadow: 0 0 0 4px #8fd16f, 0 6px 0 #5aa845; }
+  .pill-pink { background: #ffd0e3; color: var(--navy); font-size: clamp(1.6rem, 4vw, 2.5rem); padding: 8px 60px; border-radius: 24px; font-weight: 700; box-shadow: 0 0 0 4px #ffb3d1, 0 6px 0 #ee8db5; }
+  .pill-blue { background: var(--blue-soft); color: #23428c; font-size: clamp(1.4rem, 3.6vw, 2.2rem); box-shadow: 0 0 0 4px #8fbbe6, 0 6px 0 #5a8fc7; }
+
+  .card-section { position: relative; z-index: 1; margin-top: 30px; text-align: center; }
+  .card { background: #fff; border: 4px solid #fff; border-radius: 28px; padding: 26px 24px; box-shadow: 0 0 0 4px var(--edge), 0 10px 24px rgba(0,0,0,0.08); max-width: 880px; margin: 18px auto 0; text-align: left; background: var(--bgc); }
+  .card h3 { font-size: 1.45rem; font-weight: 600; color: var(--dark); margin-bottom: 10px; text-align: center; }
+  .card p, .card li { font-size: 1.12rem; line-height: 1.65; color: #1f1b3d; }
+  .card ul, .card ol { padding-left: 26px; margin-top: 8px; }
+  .card li { margin-bottom: 6px; }
+
+  .c-purple { --edge: #c3aeee; --bgc: #f3ecff; --dark: #4a2a85; }
+  .c-green  { --edge: #a5db8c; --bgc: #eefae6; --dark: #1d5a28; }
+  .c-pink   { --edge: #f9bdd7; --bgc: #fff2f8; --dark: #8f1d58; }
+  .c-blue   { --edge: #a9cbef; --bgc: #eaf3ff; --dark: #23428c; }
+  .c-yellow { --edge: #f2d98a; --bgc: #fffae6; --dark: #8a5a05; }
+
+  /* game question blocks */
+  .game-q { background: #fff; border: 3px solid #fff; border-radius: 22px; padding: 20px 24px; margin: 14px 0; box-shadow: 0 0 0 3px var(--edge), 0 6px 14px rgba(0,0,0,0.06); background: var(--bgc); }
+  .game-q p { font-weight: 600; font-size: 1.18rem; margin-bottom: 8px; }
+  .game-q .choices { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+  .game-q .choices label { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 12px; padding: 8px 18px; border: 2px solid #ddd; cursor: pointer; font-size: 1.05rem; transition: background 0.15s; }
+  .game-q .choices label:hover { background: #f5f0ff; }
+  .game-q .choices input[type="radio"] { accent-color: var(--purple); width: 18px; height: 18px; }
+
+  /* answer reveal styles */
+  .game-q.reveal { position: relative; }
+  .game-q .result-badge {
+    display: none;
+    float: right;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    margin-left: 10px;
+  }
+  .game-q.reveal .result-badge { display: inline-block; }
+  .game-q.is-correct { box-shadow: 0 0 0 3px #3a9a47, 0 6px 14px rgba(58,154,71,0.25); }
+  .game-q.is-correct .result-badge { background: #3a9a47; color: #fff; }
+  .game-q.is-wrong { box-shadow: 0 0 0 3px #e84a6f, 0 6px 14px rgba(232,74,111,0.25); }
+  .game-q.is-wrong .result-badge { background: #e84a6f; color: #fff; }
+
+  .game-q.reveal .choices label.is-answer {
+    background: #d9f5d4;
+    border-color: #3a9a47;
+    font-weight: 600;
+    color: #1d5a28;
+  }
+  .game-q.reveal .choices label.is-answer::after {
+    content: "tamang sagot";
+    margin-left: auto;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #2b7a34;
+    background: #fff;
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: 1.5px solid #3a9a47;
+  }
+  .game-q.reveal .choices label.is-selected-wrong {
+    background: #ffe0e7;
+    border-color: #e84a6f;
+    color: #8f1d58;
+  }
+  .game-q.reveal input[type="radio"] { pointer-events: none; }
+
+  .answer-note {
+    display: none;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-family: "Patrick Hand", "Fredoka", cursive;
+    color: #1d5a28;
+    background: #eefae6;
+    border-left: 5px solid #3a9a47;
+    padding: 6px 14px;
+    border-radius: 8px;
+  }
+  .game-q.reveal .answer-note { display: block; }
+
+  .btn-check { display: inline-block; margin-top: 20px; padding: 12px 40px; font-size: 1.3rem; font-weight: 600; border: none; border-radius: 18px; background: var(--green); color: #fff; cursor: pointer; box-shadow: 0 5px 0 #2b7a34, 0 8px 16px rgba(58,154,71,0.3); transition: transform 0.15s, box-shadow 0.15s; }
+  .btn-check:hover { transform: translateY(-3px); }
+  .btn-check:active { transform: translateY(4px); box-shadow: 0 2px 0 #2b7a34, 0 4px 8px rgba(58,154,71,0.3); }
+
+  #score-box { margin-top: 18px; padding: 16px 24px; border-radius: 18px; background: #fff; border: 3px dashed #b9a7e6; font-size: 1.3rem; font-weight: 600; color: var(--navy); text-align: center; }
+
+  .action-grid { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .action-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 22px 12px 18px; border-radius: 24px; border: 4px solid #fff; text-decoration: none; color: var(--dark); background: var(--bgc); box-shadow: 0 0 0 3px var(--edge), 0 8px 0 var(--edge), 0 14px 22px rgba(0,0,0,0.1); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .action-btn:hover { transform: translateY(-4px); }
+  .action-btn:active { transform: translateY(5px); box-shadow: 0 0 0 3px var(--edge), 0 2px 0 var(--edge), 0 4px 10px rgba(0,0,0,0.1); }
+  .action-btn:focus-visible { outline: 4px solid var(--navy); outline-offset: 4px; }
+  .action-btn .name { font-size: 1.55rem; font-weight: 600; }
+  .action-btn .desc { font-size: 1rem; font-weight: 400; color: #2a2350; }
+  .a-lessons { --bgc: #ffd3e4; --edge: #f5a9c8; --dark: #8f1d58; }
+  .a-games { --bgc: #ffeeb0; --edge: #f1d36b; --dark: #8a5a05; }
+  .a-quiz { --bgc: #bfdcf8; --edge: #8fbbe6; --dark: #23428c; }
+  .a-activities { --bgc: #c8eeb0; --edge: #98d27c; --dark: #1d5a28; }
+
+  .footer { position: relative; z-index: 1; margin: 40px -20px 0; background: linear-gradient(180deg, #7b55c9, #6a44b8); border-radius: 36px 36px 0 0; padding: 24px 24px 26px; display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center; color: #fff; }
+  .footer .friends { width: 200px; height: 110px; }
+  .footer p { font-family: "Patrick Hand", "Fredoka", cursive; font-size: clamp(1.05rem, 2.4vw, 1.5rem); line-height: 1.5; }
+  .footer p + p { margin-top: 6px; }
+  .pic-ph { object-fit: contain; }
+
+  .back-link { display: inline-block; margin-top: 30px; font-size: 1.2rem; font-weight: 600; color: var(--navy); text-decoration: none; background: #fff; padding: 10px 28px; border-radius: 16px; box-shadow: 0 0 0 3px #d9cbf5, 0 5px 0 #b9a7e6; transition: transform 0.15s; }
+  .back-link:hover { transform: translateY(-3px); }
+  .back-link:active { transform: translateY(3px); box-shadow: 0 0 0 3px #d9cbf5, 0 2px 0 #b9a7e6; }
+
+  @media (max-width: 960px) { .hero-side .mascot-big { width: 120px; height: 140px; } .hero-side .mascot-small { width: 90px; height: 100px; } }
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr 1fr; }
+    .title { grid-column: 1 / -1; order: -1; }
+    .hero-side { flex-direction: row; justify-content: center; }
+    .action-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer { grid-template-columns: 1fr; text-align: center; }
+    .footer .friends { margin: 0 auto; }
+    .deco, .balloon, .rainbow { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .action-btn, .back-link { transition: none; } }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <span class="deco d-star-1"><svg viewBox="0 0 24 24"><path d="M12 1l2.6 7.4L22 11l-7.4 2.6L12 21l-2.6-7.4L2 11l7.4-2.6z" fill="#ffd54a"/></svg></span>
+  <span class="deco d-star-2"><svg viewBox="0 0 24 24"><path d="M12 1l2.6 7.4L22 11l-7.4 2.6L12 21l-2.6-7.4L2 11l7.4-2.6z" fill="#ffd54a"/></svg></span>
+  <span class="deco d-star-3"><svg viewBox="0 0 24 24"><path d="M12 1l2.6 7.4L22 11l-7.4 2.6L12 21l-2.6-7.4L2 11l7.4-2.6z" fill="#ffd54a"/></svg></span>
+  <span class="deco d-heart-1"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5.5-8-11a4.5 4.5 0 018-2.7A4.5 4.5 0 0120 10c0 5.5-8 11-8 11z" fill="#b79be6"/></svg></span>
+  <span class="balloon b-pink"></span>
+  <span class="balloon b-purple"></span>
+  <span class="balloon b-blue"></span>
+  <span class="balloon b-green"></span>
+  <span class="rainbow rb-1"></span>
+
+  <header class="hero">
+    <div class="hero-side hero-left">
+      <img class="pic-ph mascot-big" src="images/girl.png" alt="Batang babae">
+      <img class="pic-ph mascot-small" src="images/bunny.png" alt="Kuneho">
+    </div>
+    <div class="title">
+      <h1>
+        <span class="t1">LARO TAYO -</span>
+        <span class="t2">PANG-ABAY!</span>
+      </h1>
+      <p class="tagline">Piliin ang tamang pang-abay!</p>
+    </div>
+    <div class="hero-side hero-right">
+      <img class="pic-ph mascot-big" src="images/boy.png" alt="Batang lalaki">
+      <img class="pic-ph mascot-small" src="images/bear.png" alt="Pusa">
+    </div>
+  </header>
+
+  <!-- Intro & Instructions -->
+  <section class="card-section">
+    <h2 class="pill pill-purple">Pang-abay Alamin Natin!</h2>
+    <div class="card c-purple">
+      <p>Handa na ba kayong subukan ang inyong natutuhan tungkol sa pang-abay? Sa pamamagitan ng mga masasayang laro, mas mapapalawak natin ang ating kaalaman sa pagkilala at wastong paggamit ng pang-abay.</p>
+      <h3 style="margin-top:16px;">Mga Panuto</h3>
+      <ol>
+        <li>Basahing mabuti ang bawat tanong.</li>
+        <li>Piliin ang tamang sagot mula sa mga pagpipilian.</li>
+        <li>Sagutin ang bawat tanong nang maingat.</li>
+        <li>I-click ang tamang sagot upang makakuha ng puntos.</li>
+        <li>Mag-enjoy at matuto habang naglalaro!</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Game proper -->
+  <section class="card-section">
+    <h2 class="pill pill-green">Piliin ang Tamang Pang-abay!</h2>
+
+    <div class="card c-blue" style="max-width:900px;">
+      <p style="text-align:center;font-weight:600;margin-bottom:6px;">Panuto: Basahin ang mga pangungusap at piliin ang titik ng tamang sagot.</p>
+
+      <!-- Q1 -->
+      <div class="game-q c-pink" data-q="1" data-answer="A" data-answer-text="Mabilis">
+        <span class="result-badge"></span>
+        <p>1. Tumakbo ang aso papunta sa bahay.</p>
+        <div class="choices">
+          <label><input type="radio" name="q1" value="A"> A. Mabilis</label>
+          <label><input type="radio" name="q1" value="B"> B. Kahapon</label>
+          <label><input type="radio" name="q1" value="C"> C. Doon</label>
+        </div>
+        <div class="answer-note">Tamang sagot: A. Mabilis</div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="game-q c-green" data-q="2" data-answer="B" data-answer-text="Sa parke">
+        <span class="result-badge"></span>
+        <p>2. Naglalaro ang mga bata.</p>
+        <div class="choices">
+          <label><input type="radio" name="q2" value="A"> A. Maaga</label>
+          <label><input type="radio" name="q2" value="B"> B. Sa parke</label>
+          <label><input type="radio" name="q2" value="C"> C. Dahan-dahan</label>
+        </div>
+        <div class="answer-note">Tamang sagot: B. Sa parke</div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="game-q c-yellow" data-q="3" data-answer="A" data-answer-text="Bukas">
+        <span class="result-badge"></span>
+        <p>3. ___ kami pupunta sa paaralan.</p>
+        <div class="choices">
+          <label><input type="radio" name="q3" value="A"> A. Bukas</label>
+          <label><input type="radio" name="q3" value="B"> B. Mabilis</label>
+          <label><input type="radio" name="q3" value="C"> C. Doon</label>
+        </div>
+        <div class="answer-note">Tamang sagot: A. Bukas</div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="game-q c-purple" data-q="4" data-answer="B" data-answer-text="Mahina">
+        <span class="result-badge"></span>
+        <p>4. ___ nagsalita ang bata upang hindi makaistorbo.</p>
+        <div class="choices">
+          <label><input type="radio" name="q4" value="A"> A. Kahapon</label>
+          <label><input type="radio" name="q4" value="B"> B. Mahina</label>
+          <label><input type="radio" name="q4" value="C"> C. Sa silid</label>
+        </div>
+        <div class="answer-note">Tamang sagot: B. Mahina</div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="game-q c-pink" data-q="5" data-answer="A" data-answer-text="Marahil">
+        <span class="result-badge"></span>
+        <p>5. ___ ay uulan mamaya.</p>
+        <div class="choices">
+          <label><input type="radio" name="q5" value="A"> A. Marahil</label>
+          <label><input type="radio" name="q5" value="B"> B. Mabilis</label>
+          <label><input type="radio" name="q5" value="C"> C. Rito</label>
+        </div>
+        <div class="answer-note">Tamang sagot: A. Marahil</div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="game-q c-green" data-q="6" data-answer="B" data-answer-text="Oo">
+        <span class="result-badge"></span>
+        <p>6. ___ sasama ako sa inyong pamamasyal.</p>
+        <div class="choices">
+          <label><input type="radio" name="q6" value="A"> A. Hindi</label>
+          <label><input type="radio" name="q6" value="B"> B. Oo</label>
+          <label><input type="radio" name="q6" value="C"> C. Baka</label>
+        </div>
+        <div class="answer-note">Tamang sagot: B. Oo</div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="game-q c-yellow" data-q="7" data-answer="A" data-answer-text="Hindi">
+        <span class="result-badge"></span>
+        <p>7. ___ ako kumain ng gulay.</p>
+        <div class="choices">
+          <label><input type="radio" name="q7" value="A"> A. Hindi</label>
+          <label><input type="radio" name="q7" value="B"> B. Bukas</label>
+          <label><input type="radio" name="q7" value="C"> C. Mabilis</label>
+        </div>
+        <div class="answer-note">Tamang sagot: A. Hindi</div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="game-q c-purple" data-q="8" data-answer="A" data-answer-text="Lubhang">
+        <span class="result-badge"></span>
+        <p>8. ___ masaya ang mga bata sa palaro.</p>
+        <div class="choices">
+          <label><input type="radio" name="q8" value="A"> A. Lubhang</label>
+          <label><input type="radio" name="q8" value="B"> B. Kahapon</label>
+          <label><input type="radio" name="q8" value="C"> C. Sa paaralan</label>
+        </div>
+        <div class="answer-note">Tamang sagot: A. Lubhang</div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="game-q c-pink" data-q="9" data-answer="A" data-answer-text="Ngayon">
+        <span class="result-badge"></span>
+        <p>9. Nag-aaral si Ana ___.</p>
+        <div class="choices">
+          <label><input type="radio" name="q9" value="A"> A. Ngayon</label>
+          <label><input type="radio" name="q9" value="B"> B. Maingat</label>
+          <label><input type="radio" name="q9" value="C"> C. Doon</label>
+        </div>
+        <div class="answer-note">Tamang sagot: A. Ngayon</div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="game-q c-green" data-q="10" data-answer="C" data-answer-text="Pamaraan">
+        <span class="result-badge"></span>
+        <p>10. Dahan-dahang lumakad ang matanda. Anong uri ng pang-abay ang salitang "dahan-dahan"?</p>
+        <div class="choices">
+          <label><input type="radio" name="q10" value="A"> A. Pamanahon</label>
+          <label><input type="radio" name="q10" value="B"> B. Panlunan</label>
+          <label><input type="radio" name="q10" value="C"> C. Pamaraan</label>
+        </div>
+        <div class="answer-note">Tamang sagot: C. Pamaraan</div>
+      </div>
+
+      <div style="text-align:center;">
+        <button class="btn-check" id="check-game">Tingnan ang Puntos</button>
+        <div id="score-box" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align:center;">
+    <a class="back-link" href="index.html">Balik sa Home</a>
+  </div>
+
+  <footer class="footer">
+    <img class="pic-ph friends" src="images/owl-footer.png" alt="">
+    <div>
+      <p>Tandaan: Ang pang-abay ay tumutulong para mas malinaw at mas masayang kwento!</p>
+      <p>Maliit na salita, malaking tulong para sa ating pag-aaral!</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    var ph = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">' +
+      '<rect x="6" y="6" width="188" height="188" rx="28" fill="#f1ecfb" stroke="#b9a7e6" stroke-width="5" stroke-dasharray="12 8"/>' +
+      '<circle cx="70" cy="76" r="14" fill="#cdbdf0"/>' +
+      '<path d="M26 160l46-52 34 36 26-26 42 42z" fill="#cdbdf0"/>' +
+      '</svg>'
+    );
+    document.querySelectorAll('img.pic-ph').forEach(function (img) {
+      img.addEventListener('error', function () {
+        if (img.dataset.fallback) return;
+        img.dataset.fallback = '1';
+        img.src = ph;
+      });
+      if (img.complete && img.naturalWidth === 0) img.dispatchEvent(new Event('error'));
+    });
+  })();
+
+  document.getElementById('check-game').addEventListener('click', function () {
+    var questions = document.querySelectorAll('.game-q');
+    var score = 0;
+
+    questions.forEach(function (q) {
+      var answer = q.dataset.answer;
+      var selected = q.querySelector('input[type="radio"]:checked');
+      var badge = q.querySelector('.result-badge');
+      var labels = q.querySelectorAll('.choices label');
+
+      // reset any previous reveal state
+      q.classList.remove('reveal', 'is-correct', 'is-wrong');
+      labels.forEach(function (lab) { lab.classList.remove('is-answer', 'is-selected-wrong'); });
+
+      var isCorrect = false;
+      if (selected && selected.value === answer) {
+        isCorrect = true;
+        score++;
+      }
+
+      // mark the correct option (green)
+      labels.forEach(function (lab) {
+        var input = lab.querySelector('input[type="radio"]');
+        if (input && input.value === answer) lab.classList.add('is-answer');
+      });
+
+      // if the user picked a wrong option, mark it red
+      if (selected && !isCorrect) {
+        var wrongLabel = selected.closest('label');
+        if (wrongLabel) wrongLabel.classList.add('is-selected-wrong');
+      }
+
+      // status badge on the question
+      q.classList.add('reveal');
+      q.classList.add(isCorrect ? 'is-correct' : 'is-wrong');
+      badge.textContent = isCorrect ? 'Tama' : 'Mali';
+    });
+
+    var box = document.getElementById('score-box');
+    var msg = '';
+    if (score === 10) msg = 'Napakahusay! Perpekto ang iyong puntos!';
+    else if (score >= 8) msg = 'Mahusay! Magaling ang iyong kaalaman!';
+    else if (score >= 6) msg = 'Good job! Ipagpatuloy ang pagsasanay!';
+    else if (score >= 4) msg = 'Nice try! Balikan ang aralin!';
+    else msg = 'Keep learning! Kaya mo pang pagbutihin!';
+    box.textContent = 'Puntos: ' + score + ' / 10 — ' + msg;
+  });
+</script>
+</body>
+</html>
